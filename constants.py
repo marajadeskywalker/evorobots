@@ -4,6 +4,7 @@ import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import time
 from pathlib import Path
+from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 
 

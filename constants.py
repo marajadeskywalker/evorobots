@@ -14,3 +14,4 @@ amplitude = numpy.pi/3
 frequency = 4
 offset = numpy.pi/4
 numberOfGenerations = 10
+populationSize = 10

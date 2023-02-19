@@ -3,12 +3,14 @@ from sensor import SENSOR
 from motor import MOTOR
 
 class ROBOT:
-    def __init__(self):
+    def __init__(self, solutionID):
         self.robotId = c.p.loadURDF("body.urdf")
         c.pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
-        self.nn = c.NEURAL_NETWORK("brain.nndf")
+        self.solutionID = solutionID
+        self.nn = c.NEURAL_NETWORK(f"brain{str(solutionID)}.nndf")
+        c.os.system(f"rm brain{str(solutionID)}.nndf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}
@@ -34,7 +36,8 @@ class ROBOT:
         stateOfLinkZero = c.p.getLinkState(self.robotId,0)
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
-        f = open("fitness.txt", "w")
+        f = open(f"tmp{str(self.solutionID)}.txt", "w")
+        c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
         f.write(str(xCoordinateOfLinkZero))
         f.close()
         exit()

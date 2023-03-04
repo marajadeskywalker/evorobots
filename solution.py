@@ -1,7 +1,7 @@
 import constants as c
 class SOLUTION:
     def __init__(self, nextAvailableID):
-        self.weights = c.numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons)
+        self.weights = 2*c.numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons)-1
         self.weights = self.weights * 2 - 1
         self.myID = nextAvailableID
 
@@ -22,7 +22,7 @@ class SOLUTION:
     def Mutate(self):
         randomRow = c.random.randint(0, 2)
         randomColumn = c.random.randint(0, 1)
-        self.weights[randomRow,randomColumn] = c.random.random() * 2 - 1.
+        self.weights[randomRow,randomColumn] = c.random.random() * 2 - 1
 
     def Create_World(self):
         c.pyrosim.Start_SDF("world.sdf")

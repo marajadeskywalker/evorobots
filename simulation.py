@@ -19,9 +19,9 @@ class SIMULATION:
     def Get_Fitness(self):
         self.robot.Get_Fitness()
     def Run(self):
-        for x in range(500):
+        for x in range(750):
             if self.directOrGUI == "GUI":
-                c.time.sleep(float(1)/240)
+                c.time.sleep(float(1)/480)
             c.p.stepSimulation()
             self.robot.Sense(x)
             self.robot.Think()

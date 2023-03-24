@@ -13,8 +13,8 @@ import copy
 amplitude = numpy.pi/3
 frequency = 4
 offset = numpy.pi/4
-numberOfGenerations = 10
+numberOfGenerations = 20
 populationSize = 10
-numSensorNeurons = 9
-numMotorNeurons = 8
-motorJointRange = 0.2
+numSensorNeurons = 11
+numMotorNeurons = 13
+motorJointRange = 0.3

@@ -19,6 +19,8 @@ class ROBOT:
     def Sense(self, x):
         for linkName in self.sensors:
             self.sensors[linkName].Get_Value(x)
+            if linkName == 10 and self.sensors[linkName].Get_Value(x) != 0:
+                print("bump")
 
     def Prepare_To_Act(self):
         self.motors = {}
@@ -33,14 +35,28 @@ class ROBOT:
                 self.motors[jointName].Set_Value(robot, desiredAngle)
 
     def Get_Fitness(self):
-        basePositionAndOrientation = p.getBasePositionAndOrientation(self.robot)
-        basePosition = basePositionAndOrientation[0]
-        xPosition = basePosition[0]
-        f = open(f"tmp{str(self.solutionID)}.txt", "w")
-        c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
-        f.write(str(xPosition))
-        f.close()
+        stateOfLinkZero = c.p.getLinkState(self.robotId,0)
+        positionOfLinkZero = stateOfLinkZero[0]
+        xCoordinateOfLinkZero = positionOfLinkZero[0]
+        if c.pyrosim.Get_Touch_Sensor_Value_For_Link("Beam") == -1.0:
+            f = open(f"tmp{str(self.solutionID)}.txt", "w")
+            c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
+            f.write(str(xCoordinateOfLinkZero))
+            f.close()
+        else:
+            f = open(f"tmp{str(self.solutionID)}.txt", "w")
+            c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
+            f.write(abs(str(xCoordinateOfLinkZero)))
+            f.close()
         exit()
+        # basePositionAndOrientation = c.p.getBasePositionAndOrientation(self.robotId)
+        # basePosition = basePositionAndOrientation[0]
+        # xPosition = basePosition[0]
+        # f = open(f"tmp{str(self.solutionID)}.txt", "w")
+        # c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
+        # f.write(str(xPosition))
+        # f.close()
+        # exit()
 
     def Think(self):
         self.nn.Update()

@@ -15,7 +15,10 @@ class SOLUTION:
         while not c.os.path.exists(f"fitness{str(self.myID)}.txt"):
             c.time.sleep(1)
         fitnessFile = open(f"fitness{str(self.myID)}.txt", "r")
-        self.fitness = float(fitnessFile.read())
+        try:
+            self.fitness = float(fitnessFile.read())
+        except ValueError:
+            self.fitness = 0
         fitnessFile.close()
         c.os.system(f"rm fitness{str(self.myID)}.txt")
 
@@ -26,13 +29,16 @@ class SOLUTION:
 
     def Create_World(self):
         c.pyrosim.Start_SDF("world.sdf")
+        # single block version
         #c.pyrosim.Send_Cube(name="Box", pos=[-5, 0, 1], size=[2, 2, 2])
-        #for i in range(0, 5):
-        #    for j in range(0, 5):
-        #        if i % 2 == 0:
-        #            c.pyrosim.Send_Cube(name=f"Box{i}{j}", pos=[3*i+3, -5+3*j, 0.5], size=[1, 1, 1])
-        #        else:
-        #            c.pyrosim.Send_Cube(name=f"Box{i}{j}", pos=[3*i+3, -3+3*j, 0.5], size=[1, 1, 1])
+        # maze version
+        # for i in range(-5, 0):
+        #     for j in range(0, 5):
+        #         if i % 2 == 0:
+        #             c.pyrosim.Send_Cube(name=f"Box{i}{j}", pos=[3*i-0.25, -5+3*j, 0.5], size=[1, 1, 1])
+        #         else:
+        #             c.pyrosim.Send_Cube(name=f"Box{i}{j}", pos=[3*i-0.25, -3+3*j, 0.5], size=[1, 1, 1])
+        # c.pyrosim.End()
         c.pyrosim.End()
 
     def Create_Body(self):
@@ -117,15 +123,17 @@ class SOLUTION:
         c.pyrosim.Send_Motor_Neuron(name=12, jointName="Torso_BackShoulder")
         c.pyrosim.Send_Motor_Neuron(name=13, jointName="Torso_LeftShoulder")
         c.pyrosim.Send_Motor_Neuron(name=14, jointName="Torso_RightShoulder")
-        c.pyrosim.Send_Motor_Neuron(name=15, jointName="FrontShoulder_FrontUpperLeg")
-        c.pyrosim.Send_Motor_Neuron(name=16, jointName="BackShoulder_BackUpperLeg")
-        c.pyrosim.Send_Motor_Neuron(name=17, jointName="LeftShoulder_LeftUpperLeg")
-        c.pyrosim.Send_Motor_Neuron(name=18, jointName="RightShoulder_RightUpperLeg")
-        c.pyrosim.Send_Motor_Neuron(name=19, jointName="FrontUpperLeg_FrontLowerLeg")
-        c.pyrosim.Send_Motor_Neuron(name=20, jointName="BackUpperLeg_BackLowerLeg")
-        c.pyrosim.Send_Motor_Neuron(name=21, jointName="LeftUpperLeg_LeftLowerLeg")
-        c.pyrosim.Send_Motor_Neuron(name=22, jointName="RightUpperLeg_RightLowerLeg")
-        c.pyrosim.Send_Motor_Neuron(name=23, jointName="BeamShoulder_Beam")
+        c.pyrosim.Send_Motor_Neuron(name=15, jointName="Torso_BeamShoulder")
+        c.pyrosim.Send_Motor_Neuron(name=16, jointName="FrontShoulder_FrontUpperLeg")
+        c.pyrosim.Send_Motor_Neuron(name=17, jointName="BackShoulder_BackUpperLeg")
+        c.pyrosim.Send_Motor_Neuron(name=18, jointName="LeftShoulder_LeftUpperLeg")
+        c.pyrosim.Send_Motor_Neuron(name=19, jointName="RightShoulder_RightUpperLeg")
+        c.pyrosim.Send_Motor_Neuron(name=20, jointName="FrontUpperLeg_FrontLowerLeg")
+        c.pyrosim.Send_Motor_Neuron(name=21, jointName="BackUpperLeg_BackLowerLeg")
+        c.pyrosim.Send_Motor_Neuron(name=22, jointName="LeftUpperLeg_LeftLowerLeg")
+        c.pyrosim.Send_Motor_Neuron(name=23, jointName="RightUpperLeg_RightLowerLeg")
+        c.pyrosim.Send_Motor_Neuron(name=24, jointName="BeamShoulder_Beam")
+
 
         # c.pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         # c.pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")

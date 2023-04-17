@@ -1,11 +1,15 @@
 import constants as c
 from solution import SOLUTION
+from operator import itemgetter
 
 class PARALLEL_HILLCLIMBER:
     def __init__(self):
         c.os.system("rm brain*.nndf")
         c.os.system("rm fitness*.txt")
+        self.generation = 0
         self.parents = {}
+        self.unevolved = {}
+        #self.evolved = []
         self.nextAvailableID = 0
         for i in range(0, c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -27,7 +31,15 @@ class PARALLEL_HILLCLIMBER:
         self.Evaluate(self.children)
         self.Print()
         self.Select()
+        if self.generation == 0:
+            for parent in self.parents:
+                self.unevolved[parent] = c.copy.deepcopy(self.parents[parent])
+        self.generation += 1
 
+
+
+    def Get_Fitness(self, item):
+        return item.fitness
 
     def Spawn(self):
         self.children = {}
@@ -39,6 +51,9 @@ class PARALLEL_HILLCLIMBER:
         for parent in self.parents:
             self.children[parent].Mutate()
     def Select(self):
+        # self.parents.update(self.children)
+        # sortedTotal = sorted(self.parents.items(), key=lambda item: item[1].fitness)
+        # self.parents = dict(sortedTotal[0:c.populationSize])
         for solution in self.parents:
             if self.parents[solution].fitness > self.children[solution].fitness:
                 self.parents[solution] = self.children[solution]
@@ -49,8 +64,26 @@ class PARALLEL_HILLCLIMBER:
         print("")
 
     def Show_Best(self):
-        lowest_so_far = 0
+        lowest_so_far_unevolved = [0, 0, 0, 0, 0]
+        lowest_values_unevolved = [999, 999, 999, 999, 999]
+        for solution in self.unevolved:
+            for i in range(0, 5):
+                if self.unevolved[solution].fitness < lowest_values_unevolved[i]:
+                    lowest_so_far_unevolved[i] = solution
+                    lowest_values_unevolved[i] = self.unevolved[solution].fitness
+                    break
+        for i in range(0, 5):
+            self.unevolved[lowest_so_far_unevolved[i]].Start_Simulation("GUI")
+            c.time.sleep(65)
+
+        lowest_so_far_evolved = [0, 0, 0, 0, 0]
+        lowest_values_evolved = [999, 999, 999, 990, 999]
         for solution in self.parents:
-            if self.parents[solution].fitness < self.parents[solution].fitness:
-                lowest_so_far = solution
-        self.parents[lowest_so_far].Start_Simulation("GUI")
+            for i in range(0, 5):
+                if self.parents[solution].fitness < lowest_values_evolved[i]:
+                    lowest_so_far_evolved[i] = solution
+                    lowest_values_evolved[i] = self.parents[solution].fitness
+                    break
+        for i in range(0, 5):
+            self.parents[lowest_so_far_evolved[i]].Start_Simulation("GUI")
+            c.time.sleep(65)

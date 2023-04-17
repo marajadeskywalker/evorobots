@@ -21,7 +21,7 @@ class SIMULATION:
     def Run(self):
         for x in range(750):
             if self.directOrGUI == "GUI":
-                c.time.sleep(float(1)/480)
+                c.time.sleep(float(1)/960)
             c.p.stepSimulation()
             self.robot.Sense(x)
             self.robot.Think()

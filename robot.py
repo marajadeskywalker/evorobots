@@ -9,6 +9,7 @@ class ROBOT:
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
         self.solutionID = solutionID
+        self.totalBlockContact = 0
         self.nn = c.NEURAL_NETWORK(f"brain{str(solutionID)}.nndf")
         c.os.system(f"rm brain{str(solutionID)}.nndf")
 
@@ -18,7 +19,11 @@ class ROBOT:
             self.sensors[linkName] = SENSOR(linkName)
     def Sense(self, x):
         for linkName in self.sensors:
-            self.sensors[linkName].Get_Value(x)
+            if linkName != "Beam":
+                self.sensors[linkName].Get_Value(x)
+            else:
+                if self.sensors[linkName].Get_Value(x) == 1.0:
+                    self.totalBlockContact += 1.0
 
     def Prepare_To_Act(self):
         self.motors = {}
@@ -36,19 +41,30 @@ class ROBOT:
                 self.motors[jointName].Set_Value(robot, desiredAngle)
 
     def Get_Fitness(self):
-        stateOfLinkZero = c.p.getLinkState(self.robotId,0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        xPosition = positionOfLinkZero[0]
+        #maximizing contact version
+
+        # f = open(f"tmp{str(self.solutionID)}.txt", "w")
+        # c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
+        # f.write(str(self.totalBlockContact))
+        # f.close()
+        # exit()
 
 
 
-        # basePositionAndOrientation = c.p.getBasePositionAndOrientation(self.robotId)
-        # basePosition = basePositionAndOrientation[0]
-        # xPosition = basePosition[0]
-        #yPosition = basePosition[1]
+
+        # stateOfLinkZero = c.p.getLinkState(self.robotId,0)
+        # positionOfLinkZero = stateOfLinkZero[0]
+        # xPosition = positionOfLinkZero[0]
+        #
+        #
+        #
+        basePositionAndOrientation = c.p.getBasePositionAndOrientation(self.robotId)
+        basePosition = basePositionAndOrientation[0]
+        xPosition = basePosition[0]
+        # #yPosition = basePosition[1]
         f = open(f"tmp{str(self.solutionID)}.txt", "w")
         c.os.system(f"mv tmp{str(self.solutionID)}.txt fitness{str(self.solutionID)}.txt")
-        f.write(str(xPosition))
+        f.write(str(-0.3*self.totalBlockContact + xPosition))
         f.close()
         exit()
 

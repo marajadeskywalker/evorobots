@@ -64,26 +64,32 @@ class PARALLEL_HILLCLIMBER:
         print("")
 
     def Show_Best(self):
-        lowest_so_far_unevolved = [0, 0, 0, 0, 0]
-        lowest_values_unevolved = [999, 999, 999, 999, 999]
-        for solution in self.unevolved:
-            for i in range(0, 5):
-                if self.unevolved[solution].fitness < lowest_values_unevolved[i]:
-                    lowest_so_far_unevolved[i] = solution
-                    lowest_values_unevolved[i] = self.unevolved[solution].fitness
-                    break
-        for i in range(0, 5):
-            self.unevolved[lowest_so_far_unevolved[i]].Start_Simulation("GUI")
-            c.time.sleep(65)
-
-        lowest_so_far_evolved = [0, 0, 0, 0, 0]
-        lowest_values_evolved = [999, 999, 999, 990, 999]
+        lowest_so_far = 0
         for solution in self.parents:
-            for i in range(0, 5):
-                if self.parents[solution].fitness < lowest_values_evolved[i]:
-                    lowest_so_far_evolved[i] = solution
-                    lowest_values_evolved[i] = self.parents[solution].fitness
-                    break
-        for i in range(0, 5):
-            self.parents[lowest_so_far_evolved[i]].Start_Simulation("GUI")
-            c.time.sleep(65)
+            if self.parents[solution].fitness < self.parents[lowest_so_far].fitness:
+                lowest_so_far = solution
+        self.parents[lowest_so_far].Start_Simulation("GUI")
+        #Display many hillclimbers version
+        # lowest_so_far_unevolved = [0, 0, 0, 0, 0]
+        # lowest_values_unevolved = [999, 999, 999, 999, 999]
+        # for solution in self.unevolved:
+        #     for i in range(0, 5):
+        #         if self.unevolved[solution].fitness < lowest_values_unevolved[i]:
+        #             lowest_so_far_unevolved[i] = solution
+        #             lowest_values_unevolved[i] = self.unevolved[solution].fitness
+        #             break
+        # for i in range(0, 5):
+        #     self.unevolved[lowest_so_far_unevolved[i]].Start_Simulation("GUI")
+        #     c.time.sleep(65)
+        #
+        # lowest_so_far_evolved = [0, 0, 0, 0, 0]
+        # lowest_values_evolved = [999, 999, 999, 990, 999]
+        # for solution in self.parents:
+        #     for i in range(0, 5):
+        #         if self.parents[solution].fitness < lowest_values_evolved[i]:
+        #             lowest_so_far_evolved[i] = solution
+        #             lowest_values_evolved[i] = self.parents[solution].fitness
+        #             break
+        # for i in range(0, 5):
+        #     self.parents[lowest_so_far_evolved[i]].Start_Simulation("GUI")
+        #     c.time.sleep(65)

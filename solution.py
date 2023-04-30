@@ -39,6 +39,7 @@ class SOLUTION:
         #         else:
         #             c.pyrosim.Send_Cube(name=f"Box{i}{j}", pos=[3*i-0.25, -3+3*j, 0.5], size=[1, 1, 1])
         # c.pyrosim.End()
+        c.pyrosim.Send_Cube(name="Box", pos=[-5, 0, 1], size=[2, 2, 2])
         c.pyrosim.End()
 
     def Create_Body(self):
@@ -95,6 +96,61 @@ class SOLUTION:
         c.pyrosim.Send_Cube(name="BackLowerLeg", pos=[0, 0, -0.5], size=[0.2,0.2,1])
         c.pyrosim.Send_Cube(name="LeftLowerLeg", pos=[0, 0, -0.5], size=[0.2,0.2,1])
         c.pyrosim.Send_Cube(name="RightLowerLeg", pos=[0, 0, -0.5], size=[0.2,0.2,1])
+
+
+        # c.pyrosim.Send_Joint(name="FrontLowerLeg_FrontFrontBumper", parent="FrontLowerLeg", child="FrontFrontBumper", type="revolute", position=[0, 0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="FrontFrontBumper", pos=[0, 0.075, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="FrontLowerLeg_FrontLeftBumper", parent="FrontLowerLeg", child="FrontLeftBumper", type="revolute", position=[0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="FrontLeftBumper", pos=[0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="FrontLowerLeg_FrontRightBumper", parent="FrontLowerLeg", child="FrontRightBumper", type="revolute", position=[-0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="FrontRightBumper", pos=[-0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        #
+        # c.pyrosim.Send_Joint(name="BackLowerLeg_BackFrontBumper", parent="BackLowerLeg", child="BackFrontBumper", type="revolute", position=[0, -0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackFrontBumper", pos=[0, -0.075, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="BackLowerLeg_BackLeftBumper", parent="BackLowerLeg", child="BackLeftBumper", type="revolute", position=[0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackLeftBumper", pos=[0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="BackLowerLeg_BackRightBumper", parent="BackLowerLeg", child="BackRightBumper", type="revolute", position=[-0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackRightBumper", pos=[-0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        #
+        # c.pyrosim.Send_Joint(name="RightLowerLeg_RightFrontBumper", parent="RightLowerLeg", child="RightFrontBumper", type="revolute", position=[-0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="RightFrontBumper", pos=[-0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="RightLowerLeg_RightRightBumper", parent="RightLowerLeg", child="RightRightBumper", type="revolute", position=[0, -0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="RightRightBumper", pos=[0, -0.075, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="RightLowerLeg_RightLeftBumper", parent="RightLowerLeg", child="RightLeftBumper", type="revolute", position=[0, 0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="RightLeftBumper", pos=[0, 0.075, 0], size=[0.15, 0.15, 0.75])
+        #
+        # c.pyrosim.Send_Joint(name="LeftLowerLeg_LeftFrontBumper", parent="LeftLowerLeg", child="LeftFrontBumper", type="revolute", position=[0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="LeftFrontBumper", pos=[0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="LeftLowerLeg_RightRightBumper", parent="LeftLowerLeg", child="LeftRightBumper", type="revolute", position=[0, -0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="LeftRightBumper", pos=[0, -0.075, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="LeftLowerLeg_LeftLeftBumper", parent="LeftLowerLeg", child="LeftLeftBumper", type="revolute", position=[0, 0.1, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="LeftLeftBumper", pos=[0, 0.075, 0], size=[0.15, 0.15, 0.75])
+        #
+        # c.pyrosim.Send_Joint(name="Torso_FrontLeftCorner", parent="Torso", child="FrontLeftCorner", type="revolute", position=[0.425, 0.5, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="FrontLeftCorner", pos=[0, 0.075, 0], size=[0.15, 0.15, 1])
+        # c.pyrosim.Send_Joint(name="Torso_FrontRightCorner", parent="Torso", child="FrontRightCorner", type="revolute", position=[0.5, 0.425, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="FrontRightCorner", pos=[0.075, 0, 0], size=[0.15, 0.15, 1])
+        #
+        # c.pyrosim.Send_Joint(name="Torso_BackLeftCorner", parent="Torso", child="BackLeftCorner", type="revolute", position=[-0.425, -0.5, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackLeftCorner", pos=[0, -0.075, 0], size=[0.15, 0.15, 1])
+        # c.pyrosim.Send_Joint(name="Torso_BackRightCorner", parent="Torso", child="BackRightCorner", type="revolute", position=[-0.5, -0.425, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackRightCorner", pos=[-0.075, 0, 0], size=[0.15, 0.15, 1])
+        #
+        # c.pyrosim.Send_Joint(name="Torso_RightLeftCorner", parent="Torso", child="RightLeftCorner", type="revolute", position=[-0.425, 0.5, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="RightLeftCorner", pos=[0, 0.075, 0], size=[0.15, 0.15, 1])
+        # c.pyrosim.Send_Joint(name="Torso_RightRightCorner", parent="Torso", child="RightRightCorner", type="revolute", position=[-0.5, 0.425, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="RightRightCorner", pos=[-0.075, 0, 0], size=[0.15, 0.15, 1])
+        #
+        # c.pyrosim.Send_Joint(name="Torso_LeftLeftCorner", parent="Torso", child="LeftLeftCorner", type="revolute", position=[0.425, -0.5, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="LeftLeftCorner", pos=[0, -0.075, 0], size=[0.15, 0.15, 1])
+        # c.pyrosim.Send_Joint(name="Torso_LeftRightCorner", parent="Torso", child="LeftRightCorner", type="revolute", position=[0.5, -0.425, 1], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="LeftRightCorner", pos=[0.075, 0, 0], size=[0.15, 0.15, 1])
+
+        # c.pyrosim.Send_Cube(name="BackFrontBumper", pos=[0, -0.075, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="BackLowerLeg_BackLeftBumper", parent="BackLowerLeg", child="BackLeftBumper", type="revolute", position=[0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackLeftBumper", pos=[0.075, 0, 0], size=[0.15, 0.15, 0.75])
+        # c.pyrosim.Send_Joint(name="BackLowerLeg_BackRightBumper", parent="BackLowerLeg", child="BackRightBumper", type="revolute", position=[-0.1, 0, -0.5], jointAxis="0 1 0")
+        # c.pyrosim.Send_Cube(name="BackRightBumper", pos=[-0.075, 0, 0], size=[0.15, 0.15, 0.75])
 
         #Create the beam's shoulder joint
         c.pyrosim.Send_Joint(name="Torso_BeamShoulder", parent="Torso", child="BeamShoulder", type="revolute", position=[0, 0, 1.5], jointAxis="0 0 1")
